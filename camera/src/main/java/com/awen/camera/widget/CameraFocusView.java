@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -43,9 +44,12 @@ public class CameraFocusView extends View {
      * 聚焦的回调接口
      */
     public interface IAutoFocus {
-        void autoFocus();
+        void autoFocus(float x,float y);
     }
 
+    public void setmIAutoFocus(IAutoFocus mIAutoFocus) {
+        this.mIAutoFocus = mIAutoFocus;
+    }
 
     public CameraFocusView(Context context) {
         this(context, null);
@@ -99,17 +103,19 @@ public class CameraFocusView extends View {
                 centerPoint = null;
                 if(y>TOP_CONTROL_HEIGHT&&y<ScreenSizeUtil.getScreenHeight()-BETTOM_CONTROL_HEIGHT){//状态栏和底部禁止点击获取焦点（显示体验不好）
                     centerPoint = new Point(x, y);
-                    showView();
+                    showAnimView();
+                    //开始对焦
+                    if (mIAutoFocus != null) {
+                        mIAutoFocus.autoFocus(event.getX(),event.getY());
+                    }
                 }
-                return true;
-        }
-        if (mIAutoFocus != null) {
-            mIAutoFocus.autoFocus();
+                break;
         }
         return true;
     }
 
-    private void showView() {
+
+    private void showAnimView() {
         isShow = true;
         if (lineAnimator == null) {
             lineAnimator = ValueAnimator.ofInt(0, 20);

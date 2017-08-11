@@ -3,6 +3,7 @@ package com.awen.camera.widget;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.PixelFormat;
+import android.graphics.Rect;
 import android.hardware.Camera;
 import android.hardware.SensorManager;
 import android.util.AttributeSet;
@@ -15,6 +16,7 @@ import com.awen.camera.util.ScreenSizeUtil;
 import com.awen.camera.util.ToastUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -159,12 +161,25 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
             parameters.setPreviewSize(preSize.width, preSize.height);
         }
 
+        /*************************** 对焦模式的选择 ********************/
+        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);//手动区域自动对焦
 
-        parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF); // 关闪光灯
+        //图片质量
         parameters.setJpegQuality(100); // 设置照片质量
-        if (parameters.getSupportedFocusModes().contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
-            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);// 连续对焦模式
+        parameters.setPreviewFormat(PixelFormat.YCbCr_420_SP); // 预览格式
+        parameters.setPictureFormat(PixelFormat.JPEG); // 相片格式为JPEG，默认为NV21
+
+        // 关闪光灯
+        parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+
+        // 横竖屏镜头自动调整
+        if (mContext.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
+            mCamera.setDisplayOrientation(90);
+        } else {
+            mCamera.setDisplayOrientation(0);
         }
+
+        //相机异常监听
         mCamera.setErrorCallback(new Camera.ErrorCallback() {
 
             @Override
@@ -187,18 +202,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
                 Log.i(TAG, error_str);
             }
         });
-
-        // 横竖屏镜头自动调整
-        if (mContext.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
-            mCamera.setDisplayOrientation(90);
-        } else {
-            mCamera.setDisplayOrientation(0);
-        }
-        parameters.setPreviewFormat(PixelFormat.YCbCr_420_SP); // 预览格式
-        parameters.setPictureFormat(PixelFormat.JPEG); // 相片格式为JPEG，默认为NV21
-        mCamera.cancelAutoFocus();//自动对焦。
         mCamera.setParameters(parameters);
-
     }
 
     /**
@@ -253,6 +257,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
 
     /**
      * 拍照
+     *
      * @param callback
      */
     public void takePicture(Camera.PictureCallback callback) {
@@ -318,7 +323,38 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         return cameraId;
     }
 
-    public void setAutoFocus() {
-        mCamera.autoFocus(this);
+
+    public void setAutoFocus(int x, int y) {
+        camerFocus(caculateFocusPoint(x, y));
     }
+
+    private void camerFocus(Rect rect) {
+        if (mCamera != null) {
+            Camera.Parameters parameters = mCamera.getParameters();
+            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+            if (parameters.getMaxNumFocusAreas() > 0) {
+                List<Camera.Area> focusAreas = new ArrayList<Camera.Area>();
+                focusAreas.add(new Camera.Area(rect, 1000));
+                parameters.setFocusAreas(focusAreas);
+            }
+            mCamera.cancelAutoFocus(); // 先要取消掉进程中所有的聚焦功能
+            mCamera.setParameters(parameters);
+            mCamera.autoFocus(this);
+        }
+    }
+
+    private Rect caculateFocusPoint(int x, int y) {
+        Rect rect = new Rect(x - 100, y - 100, x + 100, y + 100);
+        int left = rect.left * 2000 / getWidth() - 1000;
+        int top = rect.top * 2000 / getHeight() - 1000;
+        int right = rect.right * 2000 / getWidth() - 1000;
+        int bottom = rect.bottom * 2000 / getHeight() - 1000;
+        // 如果超出了(-1000,1000)到(1000, 1000)的范围，则会导致相机崩溃
+        left = left < -1000 ? -1000 : left;
+        top = top < -1000 ? -1000 : top;
+        right = right > 1000 ? 1000 : right;
+        bottom = bottom > 1000 ? 1000 : bottom;
+        return new Rect(left, top, right, bottom);
+    }
+
 }

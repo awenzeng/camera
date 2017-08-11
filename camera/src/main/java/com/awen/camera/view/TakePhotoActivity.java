@@ -70,6 +70,7 @@ public class TakePhotoActivity extends Activity implements CameraFocusView.IAuto
         takePhotoBtn = (ImageView)findViewById(R.id.takePhotoBtn);
         okBtn = (ImageView)findViewById(R.id.okBtn);
         //控件处理
+        cameraFocusView.setmIAutoFocus(this);
         openFlashImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,9 +110,10 @@ public class TakePhotoActivity extends Activity implements CameraFocusView.IAuto
     }
 
     @Override
-    public void autoFocus() {
-        cameraSurfaceView.setAutoFocus();
+    public void autoFocus(float x, float y) {
+        cameraSurfaceView.setAutoFocus((int)x,(int)y);
     }
+
 
 
     private void takePhoto() {
