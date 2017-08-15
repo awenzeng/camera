@@ -161,8 +161,6 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         /*************************** 对焦模式的选择 ********************/
         if(cameraId == Camera.CameraInfo.CAMERA_FACING_BACK){//前置摄像头
             parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);//手动区域自动对焦
-        }else{
-            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_INFINITY);
         }
         //图片质量
         parameters.setJpegQuality(100); // 设置照片质量
@@ -334,8 +332,6 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
             Camera.Parameters parameters = mCamera.getParameters();
             if(cameraId == Camera.CameraInfo.CAMERA_FACING_BACK){
                 parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);//手动区域自动对焦
-            }else{
-                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_INFINITY);
             }
             if (parameters.getMaxNumFocusAreas() > 0) {
                 List<Camera.Area> focusAreas = new ArrayList<Camera.Area>();
