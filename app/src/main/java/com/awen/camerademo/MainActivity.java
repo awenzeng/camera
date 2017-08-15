@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cameraBtn = (Button) findViewById(R.id.cameraBtn);
         showTakePhotoImg = (ImageView) findViewById(R.id.showTakePhotoImg);
         cameraBtn.setOnClickListener(this);
+
     }
 
     @Override

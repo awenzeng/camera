@@ -162,8 +162,11 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         }
 
         /*************************** 对焦模式的选择 ********************/
-        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);//手动区域自动对焦
-
+        if(cameraId == Camera.CameraInfo.CAMERA_FACING_BACK){//前置摄像头
+            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);//手动区域自动对焦
+        }else{
+            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_INFINITY);
+        }
         //图片质量
         parameters.setJpegQuality(100); // 设置照片质量
         parameters.setPreviewFormat(PixelFormat.YCbCr_420_SP); // 预览格式
@@ -202,6 +205,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
                 Log.i(TAG, error_str);
             }
         });
+        mCamera.cancelAutoFocus();
         mCamera.setParameters(parameters);
     }
 
@@ -288,12 +292,12 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     public void changeCamera(int camera_id) {
         mCamera.stopPreview();
         mCamera.release();
-        openCamera(camera_id);
-        setCameraParams(mScreenWidth, mScreenHeight);
         try {
+            openCamera(camera_id);
             mCamera.setPreviewDisplay(holder);
+            setCameraParams(mScreenWidth, mScreenHeight);
             mCamera.startPreview();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -331,7 +335,11 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     private void camerFocus(Rect rect) {
         if (mCamera != null) {
             Camera.Parameters parameters = mCamera.getParameters();
-            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+            if(cameraId == Camera.CameraInfo.CAMERA_FACING_BACK){
+                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);//手动区域自动对焦
+            }else{
+                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_INFINITY);
+            }
             if (parameters.getMaxNumFocusAreas() > 0) {
                 List<Camera.Area> focusAreas = new ArrayList<Camera.Area>();
                 focusAreas.add(new Camera.Area(rect, 1000));

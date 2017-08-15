@@ -44,6 +44,7 @@ public class TakePhotoActivity extends Activity implements CameraFocusView.IAuto
     private CameraModel mCameraModel;
     private PermissionsModel mPermissionsModel;
     private byte[] photoData;
+    private int mCameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
     public final static String RESULT_PHOTO_PATH = "photoPath";
     public static final int REQUEST_CAPTRUE_CODE = 100;
 
@@ -142,7 +143,9 @@ public class TakePhotoActivity extends Activity implements CameraFocusView.IAuto
         okBtn.setVisibility(View.GONE);
         takePhotoBtn.setVisibility(View.VISIBLE);
         cameraTopLayout.setVisibility(View.VISIBLE);
-        cameraFocusView.setVisibility(View.VISIBLE);
+        if(mCameraId == Camera.CameraInfo.CAMERA_FACING_BACK){
+            cameraFocusView.setVisibility(View.VISIBLE);
+        }
         cameraSurfaceView.getmCamera().startPreview();// 开启预览
     }
 
@@ -190,20 +193,21 @@ public class TakePhotoActivity extends Activity implements CameraFocusView.IAuto
      * 切换摄像头
      */
     private void changeCamera() {
-        int target_camera_id;
         // 重新开启相应摄像头
         if (cameraSwitchBtn.isSelected()) { // 切后置摄像头
             cameraSwitchBtn.setSelected(false);
             openFlashImg.setVisibility(View.VISIBLE);
-            target_camera_id = Camera.CameraInfo.CAMERA_FACING_BACK;
+            cameraFocusView.setVisibility(View.VISIBLE);
+            mCameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
 
         } else { // 切前置
             cameraSwitchBtn.setSelected(true);
+            cameraFocusView.setVisibility(View.GONE);
             openFlashImg.setVisibility(View.INVISIBLE); // 前置摄像头隐藏闪光灯按钮
-            target_camera_id = Camera.CameraInfo.CAMERA_FACING_FRONT;
+            mCameraId = Camera.CameraInfo.CAMERA_FACING_FRONT;
         }
         openFlashImg.setSelected(false);
-        cameraSurfaceView.changeCamera(target_camera_id);
+        cameraSurfaceView.changeCamera(mCameraId);
     }
 
     public void onResult(String path) {
