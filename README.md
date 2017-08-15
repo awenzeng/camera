@@ -1,5 +1,11 @@
 # CameraDemo
-Camera 自定义相机
+
+[![JitPack](https://jitpack.io/v/awenzeng/CameraDemo.svg)](https://jitpack.io/#awenzeng/CameraDemo)
+[![Downloads](https://jitpack.io/v/awenzeng/CameraDemo/month.svg)](https://jitpack.io/#awenzeng/CameraDemo)
+
+A simple material design app intro with cool animations and a fluent API.
+
+_Very inspired by Google's app intros._
 
 #Demo演示：
 
