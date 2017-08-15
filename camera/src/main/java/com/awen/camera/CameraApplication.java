@@ -12,7 +12,12 @@ public class CameraApplication extends Application {
 
     public static boolean DEBUG = true;
 
-    public static void init(Application app,boolean debug){
+    /**
+     * Camera初始化（主要用于工具类）debug:是否打印日志 true：打印 false：不打印
+     * @param app
+     * @param debug
+     */
+    public static void init(Application app, boolean debug){
         application = app;
         DEBUG = debug;
     }

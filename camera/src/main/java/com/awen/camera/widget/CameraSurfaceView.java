@@ -30,22 +30,21 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     private Context mContext;
     private SurfaceHolder holder;
     private Camera mCamera;
+
+    private CameraOrientationDetector mCameraOrientation;
     /**
      * 当前摄像头id
      */
     private int cameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
-    private CameraOrientationDetector mCameraOrientation;
 
-    private int mScreenWidth;
-    private int mScreenHeight;
     /**
      * 默认照片的宽
      */
-    public static final int DEFAULT_PHOTO_WIDTH = ScreenSizeUtil.getScreenHeight();
+    public int DEFAULT_PHOTO_WIDTH = ScreenSizeUtil.getScreenHeight();
     /**
      * 默认照片高
      */
-    public static final int DEFAULT_PHOTO_HEIGHT = ScreenSizeUtil.getScreenWidth();
+    public  final int DEFAULT_PHOTO_HEIGHT = ScreenSizeUtil.getScreenWidth();
 
     public CameraSurfaceView(Context context) {
         this(context, null);
@@ -65,8 +64,6 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         holder = getHolder();//获得surfaceHolder引用
         holder.addCallback(this);
         holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);//设置类型
-        mScreenWidth = DEFAULT_PHOTO_WIDTH;
-        mScreenHeight = DEFAULT_PHOTO_HEIGHT;
         mCameraOrientation = new CameraOrientationDetector(mContext, SensorManager.SENSOR_DELAY_NORMAL);
         if (mCameraOrientation.canDetectOrientation()) {
             mCameraOrientation.enable();
@@ -98,7 +95,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
         if (mCamera != null) {
-            setCameraParams(mScreenWidth, mScreenHeight);
+            setCameraParams(DEFAULT_PHOTO_WIDTH, DEFAULT_PHOTO_HEIGHT);
             mCamera.startPreview();
         }
 
@@ -295,7 +292,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         try {
             openCamera(camera_id);
             mCamera.setPreviewDisplay(holder);
-            setCameraParams(mScreenWidth, mScreenHeight);
+            setCameraParams(DEFAULT_PHOTO_WIDTH, DEFAULT_PHOTO_HEIGHT);
             mCamera.startPreview();
         } catch (Exception e) {
             e.printStackTrace();
