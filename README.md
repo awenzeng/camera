@@ -116,7 +116,9 @@ In your Activity:
 ```
 # Thanks
 [Rxjava](https://github.com/ReactiveX/RxJava)
+
 [RxAndroid](https://github.com/ReactiveX/RxAndroid)
+
 [RxPermissions](https://github.com/tbruyelle/RxPermissions)
 
 # License
