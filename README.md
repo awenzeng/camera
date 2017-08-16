@@ -6,7 +6,7 @@
 A simple camera app.Please feel free to use this. (Welcome to Star and Fork)
 
 # Demo：
-[download apk](https://github.com/awenzeng/CameraDemo/blob/master/app/app-Awen_release-release.apk)
+[Download apk](https://fir.im/c6ta)
 
 ![](https://github.com/awenzeng/CameraDemo/blob/master/resource/camera_demo.gif)
 
