@@ -11,7 +11,7 @@ A simple camera app.Please feel free to use this. (Welcome to Star and Fork)
 ![](https://github.com/awenzeng/CameraDemo/blob/master/resource/camera_demo.gif)
 
 # Download
-You can download a jar from GitHub's [releases page](https://github.com/awenzeng/CameraDemo/releases).
+You can look the latest version from GitHub's [releases page](https://github.com/awenzeng/CameraDemo/releases).
 
 Or use Gradle.
 ```java
