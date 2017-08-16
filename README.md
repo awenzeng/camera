@@ -12,7 +12,8 @@ A simple camera app.Please feel free to use this. (Welcome to Star and Fork)
 
 # Download
 You can download a jar from GitHub's [releases page](https://github.com/awenzeng/CameraDemo/releases).
-Or use Gradle:
+
+Or use Gradle.
 ```java
 	allprojects {
 		repositories {
@@ -20,7 +21,8 @@ Or use Gradle:
 			maven { url 'https://jitpack.io' }
 		}
 	}
-  
+  ```
+  ```java
   	dependencies {
 	        compile 'com.github.awenzeng:CameraDemo:1.0.1'
 	}
@@ -34,7 +36,8 @@ Or Maven:
 		    <url>https://jitpack.io</url>
 		</repository>
 	</repositories>
-  
+  ```
+  ```java
   	<dependency>
 	    <groupId>com.github.awenzeng</groupId>
 	    <artifactId>CameraDemo</artifactId>
@@ -45,6 +48,7 @@ For info on using the bleeding edge, see the [Snapshots](https://jitpack.io/#awe
 
 # ProGuard
 Depending on your ProGuard (DexGuard) config and usage, you may need to include the following lines in your proguard.cfg 
+
 ```java
 ## app proguard
 -keep class com.awen.camera.widget.**{*;}
@@ -68,6 +72,7 @@ Depending on your ProGuard (DexGuard) config and usage, you may need to include 
 ```
 # How do I use Camera?
 Simple use cases with camera's generated API will look something like this:
+
 Init in your application:
 ```java
 public class CameraDemoApp extends Application {
