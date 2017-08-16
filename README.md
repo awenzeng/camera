@@ -66,7 +66,7 @@ Depending on your ProGuard (DexGuard) config and usage, you may need to include 
 }
 
 ```
-# How do I use Glide?
+# How do I use Camera?
 Simple use cases with camera's generated API will look something like this:
 Init in your application:
 ```java
