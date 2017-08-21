@@ -5,7 +5,7 @@
 
 A simple camera app.Please feel free to use this. (Welcome to Star and Fork)
 
-[Camera Info](http://awenzeng.me/2017/08/21/tech_android_camera/)
+[Camera Info(Android Camera相机开发详解)](http://awenzeng.me/2017/08/21/tech_android_camera/)
 
 # Demo
 [Download apk](https://github.com/awenzeng/CameraDemo/blob/master/app/app-Awen_release-release.apk?raw=true)
