@@ -4,6 +4,7 @@
 [![Downloads](https://jitpack.io/v/awenzeng/CameraDemo/month.svg)](https://jitpack.io/#awenzeng/CameraDemo)
 
 A simple camera app.Please feel free to use this. (Welcome to Star and Fork)
+[Camera info](http://awenzeng.me/2017/08/21/tech_android_camera/)
 
 # Demo
 [Download apk](https://github.com/awenzeng/CameraDemo/blob/master/app/app-Awen_release-release.apk?raw=true)
