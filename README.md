@@ -1,19 +1,19 @@
 # CameraDemo
 
-[![JitPack](https://jitpack.io/v/awenzeng/CameraDemo.svg)](https://jitpack.io/#awenzeng/CameraDemo)
-[![Downloads](https://jitpack.io/v/awenzeng/CameraDemo/month.svg)](https://jitpack.io/#awenzeng/CameraDemo)
+[![JitPack](https://jitpack.io/v/awenzeng/camera.svg)](https://jitpack.io/#awenzeng/camera)
+[![Downloads](https://jitpack.io/v/awenzeng/camera/month.svg)](https://jitpack.io/#awenzeng/camera)
 
 A simple camera app.Please feel free to use this. (Welcome to Star and Fork)
 
 [Camera Info(Android Camera相机开发详解)](http://blog.csdn.net/awenyini/article/details/77477583)
 
 # Demo
-[Download apk](https://github.com/awenzeng/CameraDemo/blob/master/app/app-Awen_release-release.apk?raw=true)
+[Download apk](https://github.com/awenzeng/camera/blob/master/app/app-Awen_release-release.apk?raw=true)
 
-![](https://github.com/awenzeng/CameraDemo/blob/master/resource/camera_demo.gif)
+![](https://github.com/awenzeng/camera/blob/master/resource/camera_demo.gif)
 
 # Download
-You can download the latest version from GitHub's [releases page](https://github.com/awenzeng/CameraDemo/releases).
+You can download the latest version from GitHub's [releases page](https://github.com/awenzeng/camera/releases).
 
 Or use Gradle.
 ```java
@@ -26,7 +26,7 @@ Or use Gradle.
   ```
   ```java
   	dependencies {
-	        compile 'com.github.awenzeng:CameraDemo:1.0.1'
+	        compile 'com.github.awenzeng:camera:1.0.1'
 	}
 
 ```
@@ -42,11 +42,11 @@ Or Maven:
   ```java
   	<dependency>
 	    <groupId>com.github.awenzeng</groupId>
-	    <artifactId>CameraDemo</artifactId>
+	    <artifactId>camera</artifactId>
 	    <version>1.0.1</version>
 	</dependency>
 ```
-For info on using the bleeding edge, see the [Snapshots](https://jitpack.io/#awenzeng/CameraDemo) wiki page.
+For info on using the bleeding edge, see the [Snapshots](https://jitpack.io/#awenzeng/camera) wiki page.
 
 # ProGuard
 Depending on your ProGuard (DexGuard) config and usage, you may need to include the following lines in your proguard.cfg 
