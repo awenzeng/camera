@@ -23,22 +23,13 @@ import com.awen.camera.widget.CameraSurfaceView;
 public class CameraModel {
     private final String TAG = this.getClass().getName();
     private Context mContext;
-    private CameraSurfaceView mCameraSurfaceView;
-    private Camera mCamera;
     /**
      * 闪光灯是否打开中
      */
-    private boolean isOpenFlash = false;
 
 
     public CameraModel(Context context) {
         mContext = context;
-    }
-
-
-    public CameraModel(Context context, CameraSurfaceView cameraSurfaceView) {
-        mContext = context;
-        mCameraSurfaceView = cameraSurfaceView;
     }
 
     /**
@@ -54,11 +45,9 @@ public class CameraModel {
             for (FeatureInfo f : features) {
                 if (PackageManager.FEATURE_CAMERA_FLASH.equals(f.name)) { // 判断设备是否支持闪光灯
                     if (isOpen) {
-                        isOpenFlash = true;
                         parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH); // 开闪光灯
 
                     } else {
-                        isOpenFlash = false;
                         parameters
                                 .setFlashMode(Camera.Parameters.FLASH_MODE_OFF); // 关闪光灯
 

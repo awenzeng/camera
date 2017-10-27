@@ -18,7 +18,6 @@ import rx.functions.Action1;
 
 public class PermissionsModel{
     private RxPermissions rxPermissions;
-    private String packageName = "";
     private Context mContext;
 
     public interface PermissionListener {
@@ -29,7 +28,6 @@ public class PermissionsModel{
     public PermissionsModel(Context context) {
         mContext = context;
         rxPermissions = new RxPermissions((Activity) mContext);
-        packageName = mContext.getPackageName();
     }
 
 

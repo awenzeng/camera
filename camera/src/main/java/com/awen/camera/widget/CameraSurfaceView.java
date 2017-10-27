@@ -159,7 +159,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         }
 
         /*************************** 对焦模式的选择 ********************/
-        if(cameraId == Camera.CameraInfo.CAMERA_FACING_BACK){//前置摄像头
+        if(cameraId == Camera.CameraInfo.CAMERA_FACING_BACK){
             parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);//手动区域自动对焦
         }
         //图片质量
@@ -203,6 +203,10 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         mCamera.cancelAutoFocus();
         mCamera.setParameters(parameters);
     }
+
+
+
+
 
     /**
      * 排序：从大到小

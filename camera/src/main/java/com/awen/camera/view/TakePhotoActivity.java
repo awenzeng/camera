@@ -59,7 +59,7 @@ public class TakePhotoActivity extends Activity implements CameraFocusView.IAuto
 
     private void init(){
         mPermissionsModel = new PermissionsModel(this);
-        mCameraModel = new CameraModel(this, cameraSurfaceView);
+        mCameraModel = new CameraModel(this);
         //控件获取
         cameraSurfaceView = (CameraSurfaceView)findViewById(R.id.cameraSurfaceView);
         cameraFocusView = (CameraFocusView)findViewById(R.id.cameraFocusView);
